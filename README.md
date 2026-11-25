@@ -25,7 +25,7 @@ Dockerfile           Builds with the .NET SDK and serves with nginx
 ## Configuration
 
 - `BackendUrl` sets the API address (read from configuration in `Program.cs`, with a built-in fallback).
-- `WeatherService` needs an OpenWeatherMap API key. Set your own in `Sevices/WeatherService.cs`.
+- `OpenWeatherApiKey` in `wwwroot/appsettings.json` is your OpenWeatherMap API key, used by `WeatherService`. Keys used in a browser app are visible to its users, so restrict the key in your OpenWeatherMap account.
 
 ## Run
 
