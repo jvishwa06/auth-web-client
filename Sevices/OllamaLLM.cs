@@ -10,16 +10,18 @@ namespace OllamaChatbot.Services
     public class OllamaLLM
     {
         private readonly string _model;
+        private readonly string _apiKey;
         private readonly HttpClient _httpClient;
         private string _customPrompt = string.Empty; // Added field for custom prompt
 
-        public OllamaLLM(string model)
+        public OllamaLLM(string model, string apiKey = "")
         {
             // Ensure model is not null or empty
             _model = string.IsNullOrWhiteSpace(model)
                 ? throw new ArgumentException("Model cannot be null or empty.", nameof(model))
                 : model;
 
+            _apiKey = apiKey;
             _httpClient = new HttpClient();
         }
 
@@ -51,7 +53,7 @@ namespace OllamaChatbot.Services
                 model = _model
             };
 
-            var apiKey = "***REMOVED***"; // Use secure storage for your API key
+            var apiKey = _apiKey; // supply your Groq API key through the constructor
             var requestJson = JsonSerializer.Serialize(requestContent);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "https://api.groq.com/openai/v1/chat/completions")
